@@ -27,9 +27,12 @@
             </div>
             <div class="status">
                 <label for="status">status</label>
-                <input type="text" id="status">
+                <select id="state">
+                    <option value="não pago">Não Pago</option>
+                    <option value="pago">Pago</option>
+                </select>
             </div>
-            <input type="button" value="Adicionar">
+            <input id="teste" type="button" value="Adicionar">
         </header>
 
         <div class="tabela">
@@ -45,18 +48,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                    <td>Teste</td>
-                    <td>R$ 00,00</td>
-                    <td>26/05/2025</td>
-                    <td>Pendente</td>
-                    <td><button>Pagar</button></td>
-                    </tr>
-                    <tr>
-                    <td>Produto 2</td>
-                    <td>R$ 250,00</td>
-                    <td>30/05/2025</td>
-                    <td>Pago</td>
-                    <td><button disabled>Pago</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -76,5 +67,7 @@
             </div>
         </div>
     </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
