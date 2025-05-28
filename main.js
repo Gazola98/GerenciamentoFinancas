@@ -6,6 +6,8 @@ function carregarTabela() {
 
   dados.forEach(({ item, valor, dia, status }, index) => {
     const tr = document.createElement('tr');
+
+    // transforma a data em formato brasileiro
     const dataFormatada = new Date(dia).toLocaleDateString('pt-BR');
 
     tr.innerHTML = `
@@ -22,6 +24,7 @@ function carregarTabela() {
     `;
 
     tbody.appendChild(tr);
+    atualizarSaida();
   });
 
   // Adiciona os eventos de mudança no select para atualizar o status
@@ -60,6 +63,7 @@ function adicionarItem() {
   localStorage.setItem('financas', JSON.stringify(dados));
 
   carregarTabela();
+  atualizarSaida();
 
   // Limpa os campos
   document.getElementById('item').value = '';
@@ -83,10 +87,51 @@ function removerItem(index) {
   dados.splice(index, 1);
   localStorage.setItem('financas', JSON.stringify(dados));
   carregarTabela();
+  atualizarSaida();
 }
 
 // Evento no botão adicionar
 document.getElementById('teste').addEventListener('click', adicionarItem);
 
 // Carrega tabela ao abrir a página
-window.onload = carregarTabela;
+window.onload = () => {
+  carregarTabela();
+  atualizarSaida();
+
+  const salarioSalvo = localStorage.getItem('salario');
+  if (salarioSalvo !== null) {
+    document.getElementById('salario').value = salarioSalvo;
+    atualizarRestante(); // calcula com base no salário salvo
+  }
+};
+
+document.getElementById('salario').addEventListener('input', (e) => {
+  const valor = parseFloat(e.target.value) || 0;
+  localStorage.setItem('salario', valor);
+  atualizarRestante();
+});
+
+
+// Valores
+function atualizarSaida() {
+  const dados = JSON.parse(localStorage.getItem('financas')) || [];
+  const totalSaida = dados.reduce((soma, item) => soma + Number(item.valor), 0);
+  document.querySelector('.saida').textContent = `R$ ${totalSaida.toFixed(2).replace('.',',')}`;
+
+  atualizarRestante();
+}
+
+function atualizarRestante() {
+  const salarioInput = document.getElementById('salario');
+  const salario = parseFloat(salarioInput.value) || 0;
+
+  const dados = JSON.parse(localStorage.getItem('financas')) || [];
+  const totalSaida = dados.reduce((soma, item) => soma + Number(item.valor), 0);
+
+  const restante = salario - totalSaida;
+
+  document.querySelector('.total').textContent = `R$ ${restante.toFixed(2).replace('.', ',')}`;
+}
+
+
+document.getElementById('salario').addEventListener('input', atualizarRestante);
