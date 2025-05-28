@@ -20,7 +20,7 @@ h1 {
 }
 
 .container {
-    max-width: 550px;
+    max-width: 850px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -86,7 +86,7 @@ h1 {
     background-color: #fff;
     cursor: pointer;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    width: 100%;                    
+    width: 38%;                    
     box-sizing: border-box;
     appearance: none;               
 }
@@ -97,15 +97,15 @@ h1 {
 }
 
 table {
-    width: 100%;
+    width: 810px;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     margin-top: 20px;
 }
 
 th, td {
-    padding: 12px;
-    text-align: left;
+    padding: 8px;
+    text-align: center;
     border: 1px solid #ddd;
 }
 
@@ -117,6 +117,12 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
+.status-select{
+    padding: 4px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
 button {
     padding: 6px 12px;
     background-color: #008CBA;
@@ -156,13 +162,26 @@ button:disabled {
 }
 
 .valores .salario {
-    margin-top: 6px;
-    font-size: 18px;
-    color: #4CAF50;
+    margin-top: 2px;
+}
+
+.valores .salario input {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #2daf34;
+    font-size: 16px;
+    padding: 3px;
 }
 
 .valores .saida {
     margin-top: 6px;
     font-size: 18px;
     color: rgb(225, 22, 22);
+}
+
+.valores .total {
+    margin-top: 6px;
+    font-size: 18px;
+    color: rgb(35, 118, 212);
 }
